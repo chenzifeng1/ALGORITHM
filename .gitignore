@@ -8,3 +8,5 @@
 *.ncb
 *.opt
 B1001.txt
+*.exe
+*.ilk

@@ -1,0 +1,10 @@
+*.pch
+*.obj
+*.pdb
+*.idb
+*.plg
+*.dsp
+*.dsw
+*.ncb
+*.opt
+B1001.txt

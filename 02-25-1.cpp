@@ -20,7 +20,13 @@ int DFS(int n);
 int main(){
     Input();
     DFS(0);
-    Output();
+    if(sign){
+        cout<<"true"<<endl;
+        Output();
+    }
+    else {
+        cout<<"No Solution"<<endl;
+    }
 
     return 0 ;
 }

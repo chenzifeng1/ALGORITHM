@@ -27,10 +27,12 @@ using namespace std;
 
 int CoinCombinationA(int coins[],int coinKinds,int sum);
 int CoinCombinationB(int coins[],int coinKinds,int sum);
+int CoinCombinationC(int coins[],int coinKinds,int sum,int num);
+
 
 int main(){
     int coins[5]={3,4,5,7,10};
-    int n = CoinCombinationA(coins,5,91);
+    int n = CoinCombinationC(coins,5,15,20);
     cout<<"n:"<<n<<endl;
     return 0;
 }
@@ -81,14 +83,68 @@ int CoinCombinationB(int coins[],int coinKinds,int sum){
     }
     if(sum>n)
         return -1;
-    vector <int> dp(coinKinds+1);
-    bool isUse[coinKinds];
-    for(int i=0;i<coinKinds;i++)
-        isUse = false;
-    for(int i =0;i<coinKinds;i++){
-        dp.insert(coins[i]);
+    vector <vector<int> > dp(coinKinds+1);
+
+    for(int i =0;i<=coinKinds;i++){
+        dp[i].resize(sum+1);
     }
-    int s=0;
+    for(int i=0;i<=coinKinds;i++){
+        for(int j=0;j<=sum;j++){
+            dp[i][j]=0;
+        }
+    }
 
 
+    for(int i =0;i<coinKinds;i++){
+        dp[i][0]=1;
+    }
+    for(int i=1;i<=coinKinds;i++){
+        for(int j =1;j<=sum;j++){
+
+            dp[i][j]=0;
+            for(int k =0;k<=1;k++){
+                if(k*coins[i-1]>j)
+                    break;
+                dp[i][j]+=dp[i-1][j-k*coins[i-1]];
+            }
+        }
+    }
+    return dp[coinKinds][sum];
+}
+
+int CoinCombinationC(int coins[],int coinKinds,int sum,int num){
+    vector<vector<int> > dp(coinKinds+1);
+    int a=0;
+    cout<<"begin:"<<endl;
+    for(int i =0;i<=coinKinds;i++){
+         dp[i].resize(sum+1);
+    }
+
+    for(int i = 0;i<=coinKinds;i++){
+        for(int j =0;j<=sum;j++){
+            dp[i][j]=0;
+        }
+    }
+
+
+    for(int i=0;i<=coinKinds;i++){
+        dp[i][0]=1;
+    }
+    for(int i=1;i<=coinKinds;i++){
+        for(int j =1;j<=sum;j++){
+            dp[i][j]=0;
+            for(int k=0;k<=j/coins[i-1];k++){ //k：第i-1种硬币的数目
+                dp[i][j]+=dp[i-1][j-k*coins[i-1]];
+            }
+        }
+    }
+
+    for(int i=0;i<=coinKinds;i++){
+        for(int j=0;j<=sum;j++){
+            cout<<dp[i][j]<<" ";
+        }
+        cout<<endl;
+    }
+
+    return dp[coinKinds][sum];
 }

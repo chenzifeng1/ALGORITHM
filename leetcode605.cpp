@@ -8,16 +8,19 @@ private:
     int time=0;
 
 public:
-    int minSteps(int n) {
+   int minSteps(int n) {
 
+    int res = 0;
+        for (int i = 2; i <= n; i++) {
+            while (n % i == 0) {
+                cout<<n<<"*"<<i<<endl;
+                res += i;
+                n /= i;
+            }
+        }
+        return res;
+    }
 
-    }
-    /*void copy(int num,int n){
-        copyNum=text;
-    }
-    void paste(){
-        text+=copyNum;
-    }*/
     void showTime(){
         cout<<"the min steps is "<<time<<endl;
     }
@@ -50,13 +53,7 @@ int main(){
     Solution s = Solution();
     int n ;
     cin>>n;
-    if(n<=1)
-        cout<<s.dp(n)<<endl;
-    else if(n%2==0){
-        cout<<s.dp(n/2)+1<<endl;
-
-        }else
-    cout<<s.dp(n)<<endl;
+    cout<<s.minSteps(n);
 
     return 0;
 }

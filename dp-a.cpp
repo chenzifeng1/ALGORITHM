@@ -5,7 +5,7 @@
  int main(){
     int n;
     cin>>n;
-    int a[n],s[n],dp[n];
+    int a[n],s[n],dp[n];//dp[i]表示以a[i]元素为结尾的连续数列的最大和 s[i]表示dp[i]是从哪个元素开始的
     for(int i =0;i<n;i++){
         dp[i]=0;
         s[i]=0;
@@ -20,7 +20,7 @@
         //全负数的情况
         cout<<0<<" "<<a[0]<<" "<<a[n-1];
     }else{
-        for(int i =0;i<n;i++){
+        /*for(int i =0;i<n;i++){
             int max=a[i];
             int now=a[i];
             if(a[i]>0){
@@ -44,7 +44,29 @@
         if(dp[i]>result){
             result=dp[i];
             sign=i;
+        }*/
+        dp[0]=a[0];
+        for(int i=0;i<n;i++){
+            //状态转移方程
+            if(dp[i-1]+a[i]>a[i]){
+                dp[i]=dp[i-1]+a[i];
+                s[i]=s[i-1];
+            }else {
+                dp[i]=a[i];
+                s[i]=i;
+            }
+            //dp[i]存放以a[i]为结尾的连续序列的最大和
+            //因此需要遍历i得到最大的才是结果
+        }
+        int k=0;
+        for(int i=0;i<n;i++){
+            if(dp[i]>dp[k]){
+                k=i;
+            }
         }
     }
-    cout<<result<<" "<<sign<<" "<<s[sign];
+
+    cout<<dp[k]<<" "<<a[s[k]]<<" "<<a[k];
+    //cout<<result<<" "<<sign<<" "<<s[sign];
+
  }

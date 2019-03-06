@@ -14,9 +14,12 @@ void generateQ(int index);
 int main(){
     cin>>n;
     generateQ(1);
+    cout<<endl;
     for(int i=0;i<n;i++){
-        cout<<P[i];
+        cout<<P[i]<<" ";
+
     }
+    cout<<endl;
 }
 
 void generateQ(int index){
@@ -35,10 +38,12 @@ void generateQ(int index){
             }
             if(flag){
                 P[index]=x;//将index位皇后放在x行
+                cout<<"index:"<<index<<" "<<"x:"<<x<<" ";
                 hashTable[x]=true;//将x行的标志置为true，表示已经有皇后占领
                 generateQ(index+1);//递归测试index+1位
                 hashTable[x]=false;//递归测试结束，将原标记置回
             }
         }
+
     }
 }

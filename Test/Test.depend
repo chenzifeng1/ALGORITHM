@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1552209166 source:c:\users\70473\algorithm\test\main.cpp
+	<iostream>
+	<vector>
+	<algorithm>
+	<memory.h>
+

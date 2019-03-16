@@ -1,7 +1,7 @@
 #include <algorithm>
 #include <stdio.h>
 #include <iostream>
-
+#include <map>
 using namespace std;
 
 int numberOfArithmeticSlices(int A[],int len);
@@ -62,33 +62,22 @@ int numberOfArithmeticSlices(int A[],int len) {
 
 
         }*/
-        int num =len;
-        int sum=1;
-        while(num!=1){
-            sum*=(--num);
-
-        }
-
-        int dp[len][len];
-        for(int i=0;i<len;i++){
-
-            for(int j=0;j<len;j++){
-                if(j<=i){
-                    dp[i][j]=-1;
-                }else{
-                    dp[i][j]=A[j]-A[i];
-                }
+        map<int, int> diffMaps;
+        int res = 0;
+        for(int i = 0;i<len;i++){
+            map<int, int> diffMap ;
+            diffMaps[i] = diffMap;
+            long num = A[i];
+            for(int j=0;j<i;j++){
+                int diff = (int)(num-A[j]);
+                iterator iter = diffMaps[j].find(diff);
+                if(iter!=diffMaps.end())
+                    int count = iter->second;
+                else
+                    int count =0;
+                diffMaps[i].put(diff,iter->second+count+1);
+                res+=count;
             }
         }
-        for(int i=0;i<len;i++){
-
-            for(int j=i+1;j<len;j++){
-                int now = dp[i][j];
-                if(dp[i][j+1]-now==)
-            }
-
-        }
-
-
-        return count;
+        return res;
     }
